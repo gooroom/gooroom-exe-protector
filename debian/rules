@@ -13,19 +13,31 @@
 # package maintainers to append LDFLAGS
 #export DEB_LDFLAGS_MAINT_APPEND = -Wl,--as-needed
 
+jenkins_dir=build_keystore/exe-protector
+key_path=/var/lib/jenkins/$(jenkins_dir)
 target_dir=/debian/gooroom-exe-protector
 
 %:
 	dh $@
 
-
 override_dh_auto_build:
-	cd data; ./genkey.sh; cd -
+	cd data; ./genkey.sh $(key_path); cd -
 
 # dh_make generated override targets
 # This is example for Cmake (See https://bugs.debian.org/641051 )
 #override_dh_auto_configure:
 #	dh_auto_configure -- #	-DCMAKE_LIBRARY_PATH=$(DEB_HOST_MULTIARCH)
+
+override_dh_install:
+	if [ ! -e $(CURDIR)/data/privkey_evm.pem ]; then \
+		cp $(key_path)/privkey_evm.pem $(CURDIR)/data; \
+	fi
+
+	if [ ! -e $(CURDIR)/data/x509_evm.der ]; then \
+		cp $(key_path)/x509_evm.der $(CURDIR)/data; \
+	fi
+
+	dh_install
 
 override_dh_fixperms:
 	dh_fixperms
