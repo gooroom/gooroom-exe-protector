@@ -1,0 +1,23 @@
+#!/bin/sh
+# prerm script for gooroom-exe-protector
+#
+# see: dh_installdeb(1)
+
+# remove iversion in /etc/fstab
+sed -i -e "s@/\\text4\\trw,errors=remount-ro,iversion@/\\text4\\trw,errors=remount-ro@g" /etc/fstab
+
+# remove ima_appraise=enforce in grub
+sed -i -e "s@ima_appraise=enforce @@g" /etc/default/grub
+update-grub
+
+# Uninstall daemon
+update-rc.d gep-daemon remove
+
+if [ -e /etc/init.d/gep-daemon ]; then
+  rm /etc/init.d/gep-daemon
+fi
+
+# mkinitrd
+/usr/sbin/update-initramfs -t -u -k all
+
+exit 0
