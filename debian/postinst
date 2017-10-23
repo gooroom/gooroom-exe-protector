@@ -8,9 +8,18 @@ sed -i -e "s@/\\text4\\trw,errors=remount-ro@/\\text4\\trw,errors=remount-ro,ive
 
 # Set ima_appraise=enforce
 sed -i -e "s@GRUB_CMDLINE_LINUX_DEFAULT=\"@GRUB_CMDLINE_LINUX_DEFAULT=\"ima_appraise=enforce @g" /etc/default/grub
-update-grub
 
-# update-initramfs
+# Check if the gbp package is installed
+dpkg -l | grep gooroom-boot-protector
+if [ $? -eq 0 ]; then
+  # ima_appraise=enforce
+  cp /usr/share/gooroom/security/gooroom-boot-protector/grub.cfg.ima /boot/grub/grub.cfg
+  cp /usr/share/gooroom/security/gooroom-boot-protector/grub.cfg.ima.sig /boot/grub/grub.cfg.sig
+else
+  update-grub
+fi
+
+# Update /boot/initrd.img
 /usr/sbin/update-initramfs -t -u -k all
 
 # Install daemon

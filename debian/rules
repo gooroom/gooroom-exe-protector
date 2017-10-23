@@ -21,7 +21,7 @@ target_dir=/debian/gooroom-exe-protector
 	dh $@
 
 override_dh_auto_build:
-	cd data; ./genkey.sh $(key_path); cd -
+	cd data && ./genkey.sh $(key_path) && cd -
 
 # dh_make generated override targets
 # This is example for Cmake (See https://bugs.debian.org/641051 )

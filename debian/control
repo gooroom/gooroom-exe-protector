@@ -9,8 +9,6 @@ Homepage: http://www.gooroom.kr
 
 Package: gooroom-exe-protector
 Architecture: amd64
-Depends: attr, keyutils
-Conflicts: gooroom-boot-protector, gooroom-boot-exe-protector
 Description: Gooroom Platform execution protector
  Integrity Measurement Architecture(IMA) Settings for PC(s)
  that do not support Secureboot
