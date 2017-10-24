@@ -46,3 +46,8 @@ override_dh_fixperms:
 	chmod 700 $(CURDIR)$(target_dir)/etc/initramfs-tools/hooks/ima.sh
 	chmod 700 $(CURDIR)$(target_dir)/etc/initramfs-tools/scripts/local-top/ima.sh
 	chmod 700 $(CURDIR)$(target_dir)/etc/initramfs-tools/scripts/local-bottom/ima.sh
+
+override_dh_installdeb:
+	dh_installdeb
+
+	rm $(CURDIR)$(target_dir)/DEBIAN/conffiles
