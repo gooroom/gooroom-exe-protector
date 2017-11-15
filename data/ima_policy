@@ -9,7 +9,9 @@ dont_appraise fsmagic=0x73636673
 dont_appraise fsmagic=0xf97cff8c
 dont_appraise fsmagic=0x27e0eb
 dont_appraise fsmagic=0x6e736673
-#appraise func=BPRM_CHECK
-appraise func=FILE_MMAP mask=MAY_EXEC
-appraise func=MODULE_CHECK
-appraise func=FIRMWARE_CHECK
+#appraise func=BPRM_CHECK appraise_type=imasig
+appraise func=FILE_MMAP mask=MAY_EXEC appraise_type=imasig
+appraise func=MODULE_CHECK appraise_type=imasig
+appraise func=FIRMWARE_CHECK appraise_type=imasig
+appraise func=KEXEC_KERNEL_CHECK appraise_type=imasig
+appraise func=KEXEC_INITRAMFS_CHECK appraise_type=imasig
