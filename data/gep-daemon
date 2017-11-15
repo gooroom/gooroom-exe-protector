@@ -28,7 +28,7 @@ check() {
 	# 부트 파라메터 확인 및 로그에서 policy update 확인
 	cmdline=$(cat /proc/cmdline)
 	cmdline+=" "
-	ima_message=$(journalctl -b | grep "kernel: IMA: policy update completed")
+	ima_message=$(journalctl -b -k MESSAGE="IMA: policy update completed")
 
 	# 정규표현식
 	re_enforce="\s+ima_appraise=enforce\s+"
