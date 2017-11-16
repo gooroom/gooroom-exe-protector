@@ -1,3 +1,18 @@
+gooroom-exe-protector (0.1.1+grm1u1) unstable; urgency=medium
+
+  [ jongkyung.woo ]
+  * [0df81e59] Modifed it according to the enviroment of the build server
+  * [e370ed60] gooroom-boot-protector update to check when installing package
+  * [49016589] Remove the automatically generated DEBIAN/conffiles file after dh_installdeb runs
+  * [39e50c0d] Updated policy for ima_policy file
+
+  [ Seunghun Han ]
+  * [db2ffab1] Change check code for gep-daemon
+
+  [ Gooroom Autobuilder ]
+
+ -- Gooroom Autobuilder <jenkins@gooroom.kr>  Thu, 16 Nov 2017 17:40:38 +0900
+
 gooroom-exe-protector (0.1.0) unstable; urgency=medium
 
   * Initial Release.
