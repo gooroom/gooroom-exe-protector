@@ -22,41 +22,56 @@ MODULES=""
 
 # Get lsb functions
 . /lib/lsb/init-functions
-ret_value_of_check=
+ret_value_of_check=0
 
+# Write the syslog message
+#  $1 - Message
+#  $2 - Error code
+#  $3 - Priority
+out_log()
+{
+	/usr/bin/python3 -c "from systemd import journal;journal.send('$TAG_NAME: $1', SYSLOG_IDENTIFIER='$SERVICE_NAME', GRMCODE='$2', PRIORITY=$3)"
+}
+
+# Check status of security service
 check() {
-	# 부트 파라메터 확인 및 로그에서 policy update 확인
+	# Check boot parameters and a policy update result
 	cmdline=$(cat /proc/cmdline)
 	cmdline+=" "
 	ima_message=$(journalctl -b -k MESSAGE="IMA: policy update completed")
 
-	# 정규표현식
 	re_enforce="\s+ima_appraise=enforce\s+"
 	re_off="\s+ima=off\s+"
 	re_policy="IMA: policy update completed"
 
 	if [[ $cmdline =~ $re_enforce && ! $cmdline =~ $re_off && $ima_message =~ $re_policy ]]; then
 		log_action_msg "$TAG_NAME:" "$SERVICE_NAME active"
-		ret_value_of_check="0"
+		ret_value_of_check=0
 	else
 		log_action_msg "$TAG_NAME:" "$SERVICE_NAME inactive"
-		ret_value_of_check="-1"
+		ret_value_of_check=-1
 	fi
 }
 
-# 실행파일 보호 서비스
+# Executable file protector service main
 case "$1" in
 	start)
 		log_daemon_msg "$TAG_NAME" "Start Gooroom Executable File Protector service"
 		log_end_msg 0
 		check
-		logger --id=$$ -p 3 -t $SERVICE_NAME "$TAG_NAME: errorcode=$ret_value_of_check"
+
+		if [ $ret_value_of_check -eq 0 ]; then
+			out_log "started successfully" "030001" 6
+		else
+			out_log "failed to start" "030003" 3
+		fi
 	;;
 
 	stop)
 		log_daemon_msg "$TAG_NAME" "Stop Gooroom Executable File Protector service"
 		log_end_msg 0
-		logger --id=$$ -p 3 -t $SERVICE_NAME "$TAG_NAME: errorcode=1"
+
+		out_log "stoped successfully" "030002" 6
 	;;
 
 	enable-autostart)
