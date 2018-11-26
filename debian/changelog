@@ -1,3 +1,12 @@
+gooroom-exe-protector (0.2.1+grm1u1) unstable; urgency=medium
+
+  [ gooroom ]
+  * [264363be] Change log formats
+
+  [ Gooroom Autobuilder ]
+
+ -- Gooroom Autobuilder <jenkins@gooroom.kr>  Mon, 26 Nov 2018 19:10:51 +0900
+
 gooroom-exe-protector (0.1.1+grm1u1) unstable; urgency=medium
 
   [ jongkyung.woo ]
