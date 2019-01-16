@@ -1,3 +1,12 @@
+gooroom-exe-protector (0.2.2+grm1u1) unstable; urgency=medium
+
+  [ jongkyung.woo ]
+  * [1da2d956] Support for gep-daemon compatibility in Gooroom 2.0
+
+  [ Gooroom Autobuilder ]
+
+ -- Gooroom Autobuilder <jenkins@gooroom.kr>  Wed, 16 Jan 2019 16:38:01 +0900
+
 gooroom-exe-protector (0.2.1+grm1u1) unstable; urgency=medium
 
   [ gooroom ]
