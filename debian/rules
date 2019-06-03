@@ -17,11 +17,17 @@ jenkins_dir=build_keystore/exe-protector
 key_path=/var/lib/jenkins/$(jenkins_dir)
 target_dir=/debian/gooroom-exe-protector
 
+vendor_name_1=v3
+
 %:
 	dh $@
 
 override_dh_auto_build:
+	cd data && ./genkey_system.sh $(key_path) && cd -
 	cd data && ./genkey.sh $(key_path) && cd -
+
+    #- vendor (v3)
+	#cd data && ./genkey_vendor.sh $(key_path) $(vendor_name_1) && cd -
 
 # dh_make generated override targets
 # This is example for Cmake (See https://bugs.debian.org/641051 )
@@ -29,13 +35,18 @@ override_dh_auto_build:
 #	dh_auto_configure -- #	-DCMAKE_LIBRARY_PATH=$(DEB_HOST_MULTIARCH)
 
 override_dh_install:
-	if [ ! -e $(CURDIR)/data/privkey_evm.pem ]; then \
-		cp $(key_path)/privkey_evm.pem $(CURDIR)/data; \
+	if [ ! -e $(CURDIR)/data/privkey_ima.pem ]; then \
+		cp $(key_path)/privkey_ima.pem $(CURDIR)/data; \
 	fi
 
-	if [ ! -e $(CURDIR)/data/x509_evm.der ]; then \
-		cp $(key_path)/x509_evm.der $(CURDIR)/data; \
+	if [ ! -e $(CURDIR)/data/x509_ima.der ]; then \
+		cp $(key_path)/x509_ima.der $(CURDIR)/data; \
 	fi
+
+    #- vendor (v3)
+	#if [ ! -e $(CURDIR)/data/x509_$(vendor_name_1)_ima.der ]; then \
+	#	cp $(key_path)/x509_$(vendor_name_1)_ima.der $(CURDIR)/data; \
+	#fi
 
 	dh_install
 

@@ -1,0 +1,3 @@
+커널 컴파일시 gooroom_x509_system.pem를
+CONFIG_SYSTEM_TRUSTED_KEYS="debian/certs/gooroom_x509_system.pem"으로 등록
+

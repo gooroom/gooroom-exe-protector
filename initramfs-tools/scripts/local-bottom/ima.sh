@@ -16,8 +16,8 @@ case "$1" in
     ;;
 esac
 
-ima_id=`keyctl newring _ima @u`
-cat /usr/share/gooroom/security/gooroom-exe-protector/x509_evm.der | keyctl padd asymmetric '' $ima_id
+ima_id="`awk '/\.ima:/ { printf "%d", "0x"$1; }' /proc/keys`"
+cat /usr/share/gooroom/security/gooroom-exe-protector/x509_ima.der | keyctl padd asymmetric '' $ima_id
 
 IMA_POLICY=/sys/kernel/security/ima/policy
 LSM_POLICY=/usr/share/gooroom/security/gooroom-exe-protector/ima_policy
