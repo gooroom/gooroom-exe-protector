@@ -1,3 +1,13 @@
+gooroom-exe-protector (0.3.1+grm1u1) unstable; urgency=medium
+
+  [ jongkyung.woo ]
+  * [1f304fbe] Support multiple-key functions
+  * [74039dea] Added gooroom_codename in rules
+
+  [ Gooroom Autobuilder ]
+
+ -- Gooroom Autobuilder <jenkins@gooroom.kr>  Wed, 23 Oct 2019 11:37:02 +0900
+
 gooroom-exe-protector (0.2.2+grm1u1) unstable; urgency=medium
 
   [ jongkyung.woo ]
