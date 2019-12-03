@@ -1,0 +1,8 @@
+/data/gep-daemon /usr/share/gooroom/security/gooroom-exe-protector
+/data/genkey.sh /usr/share/gooroom/security/gooroom-exe-protector
+/data/ima_policy /usr/share/gooroom/security/gooroom-exe-protector
+/data/x509_ima.der /usr/share/gooroom/security/gooroom-exe-protector
+#/data/x509_v3_ima.der /usr/share/gooroom/security/gooroom-exe-protector
+/initramfs-tools/hooks/ima.sh /etc/initramfs-tools/hooks
+/initramfs-tools/scripts/local-top/ima.sh /etc/initramfs-tools/scripts/local-top
+/initramfs-tools/scripts/local-bottom/ima.sh /etc/initramfs-tools/scripts/local-bottom

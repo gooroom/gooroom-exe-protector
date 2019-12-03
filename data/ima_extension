@@ -1,0 +1,7 @@
+# Begining of the file
+[ v3_usr ]
+basicConstraints=critical,CA:FALSE
+keyUsage=digitalSignature
+subjectKeyIdentifier=hash
+authorityKeyIdentifier=keyid
+# EOF

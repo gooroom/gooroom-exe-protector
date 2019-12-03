@@ -1,0 +1,14 @@
+Source: gooroom-exe-protector
+Section: utils
+Priority: optional
+Maintainer: gooroom <gooroom@gooroom.kr>
+Build-Depends: debhelper (>= 9), openssl
+Standards-Version: 3.9.8
+Homepage: http://www.gooroom.kr
+#Vcs-Browser: https://git.gooroom.kr/gooroom-exe-protector.git
+
+Package: gooroom-exe-protector
+Architecture: amd64
+Description: Gooroom Platform execution protector
+ Integrity Measurement Architecture(IMA) Settings for PC(s)
+ that do not support Secureboot

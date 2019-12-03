@@ -1,0 +1,57 @@
+gooroom-exe-protector (0.3.1+grm2u1) unstable; urgency=medium
+
+  [ jongkyung.woo ]
+  * [cf7d8de5] Modified copyright
+
+  [ Gooroom Autobuilder ]
+
+ -- Gooroom Autobuilder <jenkins@gooroom.kr>  Fri, 29 Nov 2019 09:44:47 +0900
+
+gooroom-exe-protector (0.3.1+grm1u1) unstable; urgency=medium
+
+  [ jongkyung.woo ]
+  * [1f304fbe] Support multiple-key functions
+  * [74039dea] Added gooroom_codename in rules
+
+  [ Gooroom Autobuilder ]
+
+ -- Gooroom Autobuilder <jenkins@gooroom.kr>  Wed, 23 Oct 2019 11:37:02 +0900
+
+gooroom-exe-protector (0.2.2+grm1u1) unstable; urgency=medium
+
+  [ jongkyung.woo ]
+  * [1da2d956] Support for gep-daemon compatibility in Gooroom 2.0
+
+  [ Gooroom Autobuilder ]
+
+ -- Gooroom Autobuilder <jenkins@gooroom.kr>  Wed, 16 Jan 2019 16:38:01 +0900
+
+gooroom-exe-protector (0.2.1+grm1u1) unstable; urgency=medium
+
+  [ gooroom ]
+  * [264363be] Change log formats
+
+  [ Gooroom Autobuilder ]
+
+ -- Gooroom Autobuilder <jenkins@gooroom.kr>  Mon, 26 Nov 2018 19:10:51 +0900
+
+gooroom-exe-protector (0.1.1+grm1u1) unstable; urgency=medium
+
+  [ jongkyung.woo ]
+  * [0df81e59] Modifed it according to the enviroment of the build server
+  * [e370ed60] gooroom-boot-protector update to check when installing package
+  * [49016589] Remove the automatically generated DEBIAN/conffiles file after dh_installdeb runs
+  * [39e50c0d] Updated policy for ima_policy file
+
+  [ Seunghun Han ]
+  * [db2ffab1] Change check code for gep-daemon
+
+  [ Gooroom Autobuilder ]
+
+ -- Gooroom Autobuilder <jenkins@gooroom.kr>  Thu, 16 Nov 2017 17:40:38 +0900
+
+gooroom-exe-protector (0.1.0) unstable; urgency=medium
+
+  * Initial Release.
+
+ -- jongkyung.woo <jkwoo@gooroom.kr>  Thu, 19 Oct 2017 12:03:29 +0900

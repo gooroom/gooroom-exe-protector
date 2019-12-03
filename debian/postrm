@@ -1,0 +1,32 @@
+#!/bin/sh
+# postrm script for gooroom-exe-protector
+#
+# see: dh_installdeb(1)
+
+# remove iversion in /etc/fstab
+sed -i -e "s@/\\text4\\trw,errors=remount-ro,iversion@/\\text4\\trw,errors=remount-ro@g" /etc/fstab
+
+# remove ima_appraise=enforce in grub
+sed -i -e "s@ima_appraise=enforce @@g" /etc/default/grub
+
+# Check if the gbp package is installed
+dpkg -l | grep gooroom-boot-protector
+if [ $? -eq 0 ]; then
+  # ima=off
+  cp /usr/share/gooroom/security/gooroom-boot-protector/grub.cfg /boot/grub/grub.cfg
+  cp /usr/share/gooroom/security/gooroom-boot-protector/grub.cfg.sig /boot/grub/grub.cfg.sig
+else
+  update-grub
+fi
+
+# Uninstall daemon
+update-rc.d gep-daemon remove
+
+if [ -e /etc/init.d/gep-daemon ]; then
+  rm /etc/init.d/gep-daemon
+fi
+
+# Update /boot/initrd.img
+/usr/sbin/update-initramfs -t -u -k all
+
+exit 0

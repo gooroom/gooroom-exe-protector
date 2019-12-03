@@ -1,0 +1,107 @@
+#!/bin/bash
+### BEGIN INIT INFO
+# Provides:          gep-daemon
+# Required-Start:
+# Required-Stop:
+# Should-Start:
+# Should-Stop:
+# Default-Start:     2 3 4 5
+# Default-Stop:
+# Short-Description: Gooroom Executable File Protector service
+# Description:       Gooroom Executable File Protector protects drivers and executable files.
+### END INIT INFO
+
+set -e
+
+SERVICE_NAME="gep-daemon"
+SERVICE_PATH="/usr/share/gooroom-security/exe-protector/$SERVICE_NAME"
+TAG_NAME="GEP"
+
+OPTIONS=""
+MODULES=""
+
+# Get lsb functions
+. /lib/lsb/init-functions
+ret_value_of_check=0
+
+# Write the syslog message
+#  $1 - Message
+#  $2 - Error code
+#  $3 - Priority
+out_log()
+{
+	/usr/bin/python3 -c "from systemd import journal;journal.send('$TAG_NAME: $1', SYSLOG_IDENTIFIER='$SERVICE_NAME', GRMCODE='$2', PRIORITY=$3)"
+}
+
+# Check status of security service
+check() {
+	# Check boot parameters and a policy update result
+	cmdline=$(cat /proc/cmdline)
+	cmdline+=" "
+	ima_message=$(journalctl -b -k MESSAGE="IMA: policy update completed")
+
+	re_enforce="\s+ima_appraise=enforce\s+"
+	re_off="\s+ima=off\s+"
+	re_policy="IMA: policy update completed"
+
+	# Gooroom 2.0
+	kernel_major_ver=$(uname -r | awk -F"." '{print $1}')
+	kernel_minor_ver=$(uname -r | awk -F"." '{print $2}')
+	if [[ $kernel_major_ver -eq "4" && $kernel_minor_ver -ge "18" ]]; then
+		ima_message=$(journalctl -b -k MESSAGE="ima: policy update completed")
+		re_policy="ima: policy update completed"
+	fi
+
+	if [[ $cmdline =~ $re_enforce && ! $cmdline =~ $re_off && $ima_message =~ $re_policy ]]; then
+		log_action_msg "$TAG_NAME:" "$SERVICE_NAME active"
+		ret_value_of_check=0
+	else
+		log_action_msg "$TAG_NAME:" "$SERVICE_NAME inactive"
+		ret_value_of_check=-1
+	fi
+}
+
+# Executable file protector service main
+case "$1" in
+	start)
+		log_daemon_msg "$TAG_NAME" "Start Gooroom Executable File Protector service"
+		log_end_msg 0
+		check
+
+		if [ $ret_value_of_check -eq 0 ]; then
+			out_log "started successfully" "030001" 6
+		else
+			out_log "failed to start" "030003" 3
+		fi
+	;;
+
+	stop)
+		log_daemon_msg "$TAG_NAME" "Stop Gooroom Executable File Protector service"
+		log_end_msg 0
+
+		out_log "stoped successfully" "030002" 6
+	;;
+
+	enable-autostart)
+		log_action_msg "$TAG_NAME" "Enabling autostart"
+		update-rc.d $SERVICE_NAME remove
+		cp $SERVICE_PATH /etc/init.d/
+		update-rc.d $SERVICE_NAME defaults
+	;;
+
+	disable-autostart)
+		log_action_msg "$TAG_NAME" "Disabling autostart"
+		update-rc.d exe-protector remove
+	;;
+
+	check)
+		check
+	;;
+
+	*)
+		log_action_msg "Usage: $0 {start|stop|enable-autostart|disable-autostart|check}"
+		exit 1
+	;;
+esac
+
+exit 0
