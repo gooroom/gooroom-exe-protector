@@ -12,11 +12,11 @@ sed -i -e "s@GRUB_CMDLINE_LINUX_DEFAULT=\"@GRUB_CMDLINE_LINUX_DEFAULT=\"ima_appr
 # Check if the gbp package is installed
 dpkg -l | grep gooroom-boot-protector
 if [ $? -eq 0 ]; then
-  # ima_appraise=enforce
-  cp /usr/share/gooroom/security/gooroom-boot-protector/grub.cfg.ima /boot/grub/grub.cfg
-  cp /usr/share/gooroom/security/gooroom-boot-protector/grub.cfg.ima.sig /boot/grub/grub.cfg.sig
+    # ima_appraise=enforce
+    cp /usr/share/gooroom/security/gooroom-boot-protector/grub.cfg.ima /boot/grub/grub.cfg
+    cp /usr/share/gooroom/security/gooroom-boot-protector/grub.cfg.ima.sig /boot/grub/grub.cfg.sig
 else
-  update-grub
+    update-grub
 fi
 
 # Update /boot/initrd.img

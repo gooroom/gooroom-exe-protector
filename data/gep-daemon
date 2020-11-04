@@ -14,7 +14,7 @@
 set -e
 
 SERVICE_NAME="gep-daemon"
-SERVICE_PATH="/usr/share/gooroom-security/exe-protector/$SERVICE_NAME"
+SERVICE_PATH="/usr/share/gooroom/security/gooroom-exe-protector/$SERVICE_NAME"
 TAG_NAME="GEP"
 
 OPTIONS=""
