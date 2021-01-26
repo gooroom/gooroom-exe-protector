@@ -1,3 +1,10 @@
+gooroom-exe-protector (0.3.1+grm2u1+mois01) unstable; urgency=medium
+
+  [ jongkyung.woo ]
+  * [8bcc7746] Released on mois-2.0
+
+ -- Gooroom Autobuilder <jenkins@gooroom.kr>  Tue, 26 Jan 2021 14:54:31 +0900
+
 gooroom-exe-protector (0.3.1+grm2u1+kepco01) unstable; urgency=medium
 
   [ jongkyung.woo ]
