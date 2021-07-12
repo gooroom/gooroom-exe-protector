@@ -1,3 +1,11 @@
+gooroom-exe-protector (0.3.2+grm2u1) unstable; urgency=medium
+
+  [ jongkyung.woo ]
+  * [656bbd8a] Fixed typo in gep-daemon
+  * [50ff475e] Added to check gooroom-2.0 or later in gep-daemon
+
+ -- Gooroom Autobuilder <jenkins@gooroom.kr>  Mon, 12 Jul 2021 18:12:16 +0900
+
 gooroom-exe-protector (0.3.1+grm2u1) unstable; urgency=medium
 
   [ jongkyung.woo ]
