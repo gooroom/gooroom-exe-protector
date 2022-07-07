@@ -1,3 +1,10 @@
+gooroom-exe-protector (0.3.3+grm3u1) unstable; urgency=medium
+
+  [ jongkyung.woo ]
+  * [196e7931] Added to check gooroom-2.0 or later in gep-daemon
+
+ -- Gooroom Autobuilder <jenkins@gooroom.kr>  Thu, 07 Jul 2022 09:42:49 +0900
+
 gooroom-exe-protector (0.3.2+grm3u1) unstable; urgency=medium
 
   [ jongkyung.woo ]
